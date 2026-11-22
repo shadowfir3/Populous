@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f5ee"><meta name="description" content="Explore a living pixel atlas of seven species, changing populations, and procedurally generated biomes.">
+<title>Populous — World atlas</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="masthead"><div class="mastinner">
+ <div class="brand"><span id="mark"></span><div><b>Populous</b><small>Ecosystem simulator</small></div></div>
+ <nav aria-label="Simulation views"><button id="atlasTab" class="nav-active" aria-current="page"><i data-icon="atlas"></i>World atlas</button><button id="graphTab"><i data-icon="graph"></i>Population graph</button></nav>
+ <span id="saveStatus" class="saveStatus"><i data-icon="save"></i><span>Local session</span></span>
+</div></header>
+<main>
+ <div class="pageheading"><div><div class="kicker"><span class="rule"></span><span id="seed">World seed</span></div><h1 id="pageTitle">World atlas</h1></div>
+ <div class="world-actions"><span class="live" id="live"><span></span><b>Running</b></span><button class="button newworld" id="newWorld"><i data-icon="reset"></i>New world</button></div></div>
+ <div class="dashboard" id="dashboard">
+  <section class="mapcard panel" id="mapcard" aria-label="World map">
+   <div class="panelhead"><div class="titlegroup"><i data-icon="atlas"></i><h2>Biome map</h2></div><div class="maptools"><button id="layersButton" aria-expanded="false"><i data-icon="layers"></i>Layers<i data-icon="chevron"></i></button><span></span><button id="expand" class="iconbtn" title="Expand map" aria-label="Expand map"><i data-icon="expand"></i></button></div></div>
+   <div id="layerMenu" class="layerMenu" hidden><h3>Map layers</h3><label>Biome terrain<input id="terrainCheck" type="checkbox" checked></label><label>Lifeforms<input id="lifeCheck" type="checkbox" checked></label><label>Map labels<input id="labelCheck" type="checkbox" checked></label></div>
+   <div class="atlasframe"><div class="canvaswrap" id="canvaswrap"><canvas id="terrain" width="1080" height="1080" aria-label="Generated biome terrain"></canvas><canvas id="dots" width="1080" height="1080" aria-label="Living species on the map"></canvas><canvas id="labels" width="1080" height="1080" aria-label="Atlas labels and map scale"></canvas><div class="loading" id="loading">Generating terrain…</div><div class="inspect" id="inspect" hidden></div></div></div>
+   <div class="mapfoot"><span><i data-icon="grid"></i>1,080 × 1,080 px</span><span>10 km² per cell</span></div>
+  </section>
+  <aside>
+   <section class="panel controls"><div class="panelhead"><div class="titlegroup"><i data-icon="clock"></i><h2>Time controls</h2></div><span class="tick" id="tick">Tick 0</span></div>
+   <div class="playback"><button class="pause" id="pause"><i data-icon="pause"></i>Pause</button><div class="speeds" aria-label="Simulation speed"><button data-speed="1" class="selected" aria-pressed="true">1×</button><button data-speed="2" aria-pressed="false">2×</button><button data-speed="4" aria-pressed="false">4×</button></div></div></section>
+   <section class="panel census"><div class="panelhead"><div class="titlegroup"><i data-icon="leaf"></i><h2>Species census</h2></div><button id="master" class="eye" aria-label="Show all lifeforms" aria-pressed="true" title="Toggle all lifeforms"><i data-icon="eye"></i></button></div>
+   <div class="censusbody"><div class="total"><div><div class="overline">Total population</div><strong id="total">0</strong></div><canvas id="spark" width="116" height="44" aria-label="Recent total population"></canvas></div><div id="groups"></div></div></section>
+   <section class="panel biomelegend"><div class="panelhead"><div class="titlegroup"><i data-icon="layers"></i><h2>Biome key</h2></div></div><div id="biomes"></div></section>
+  </aside>
+ </div>
+ <section id="graphView" class="panel graphview" hidden>
+ <div class="panelhead"><div class="titlegroup"><i data-icon="graph"></i><h2>Population history</h2></div><div class="charttools"><button id="zoomIn" aria-label="Zoom in on history" title="Zoom in"><i data-icon="plus"></i></button><button id="zoomOut" aria-label="Zoom out on history" title="Zoom out"><i data-icon="minus"></i></button><button id="fit">All ticks</button></div></div>
+ <div class="chartarea"><canvas id="graph" aria-label="Line chart showing species population by simulation tick"></canvas></div>
+ <div class="graphbottom"><div id="graphLegend"></div><label class="timeline">History position<input type="range" id="timeline" min="0" value="0" max="0"></label></div>
+ </section>
+</main>
+<dialog id="resetDialog"><div class="dialogbody"><span class="dialogicon"><i data-icon="reset"></i></span><h2>Generate a new world?</h2><p>This replaces the current map, lifeforms, and population history saved in this browser.</p><div class="dialogbuttons"><button class="button" id="cancelReset">Cancel</button><button class="pause" id="confirmReset">Generate world</button></div></div></dialog>
+<script type="module" src="app.mjs"></script>
+</body></html>
